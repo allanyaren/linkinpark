@@ -1,0 +1,373 @@
+<!DOCTYPE html> 
+<html>
+<head>
+<style type="text/css">
+    #outerCircleText {
+        font-style:oblique;
+        font-weight: bold;
+        font-family: 'verdana', arial;
+        color:#609;
+    position: absolute;top: 0;left: 0;z-index: 3000;cursor: default;}
+    #outerCircleText div {position: relative;}
+    #outerCircleText div div {position: absolute;top: 0;left: 0;text-align: center;}
+</style>
+
+
+<script type="text/javascript">
+
+;(function(){
+
+var msg = "Linkin Park"; //aki cambien el texto, este sera el que siga al raton
+
+var size = 20;//tamaño de la letra
+var circleY = 0.75; var circleX = 3;
+var letter_spacing = 5;
+var diameter = 5;
+var rotation = 0.1;
+var speed = 0.1;
+
+if (!window.addEventListener && !window.attachEvent || !document.createElement) return;
+
+msg = msg.split('');
+var n = msg.length - 1, a = Math.round(size * diameter * 0.408333), currStep = 20,
+ymouse = a * circleY + 20, xmouse = a * circleX + 20, y = [], x = [], Y = [], X = [],
+o = document.createElement('div'), oi = document.createElement('div'),
+b = document.compatMode && document.compatMode != "BackCompat"? document.documentElement : document.body,
+
+mouse = function(e){
+ e = e || window.event;
+ ymouse = !isNaN(e.pageY)? e.pageY : e.clientY; // y-position
+ xmouse = !isNaN(e.pageX)? e.pageX : e.clientX; // x-position
+},
+
+makecircle = function(){
+ if(init.nopy){
+  o.style.top = (b || document.body).scrollTop + 'px';
+  o.style.left = (b || document.body).scrollLeft + 'px';
+ };
+ currStep -= rotation;
+ for (var d, i = n; i > -1; --i){
+  d = document.getElementById('iemsg' + i).style;
+  d.top = Math.round(y[i] + a * Math.sin((currStep + i) / letter_spacing) * circleY - 15) + 'px';
+  d.left = Math.round(x[i] + a * Math.cos((currStep + i) / letter_spacing) * circleX) + 'px';
+ };
+},
+
+drag = function(){
+ y[0] = Y[0] += (ymouse - Y[0]) * speed;
+ x[0] = X[0] += (xmouse - 20 - X[0]) * speed;
+ for (var i = n; i > 0; --i){
+  y[i] = Y[i] += (y[i-1] - Y[i]) * speed;
+  x[i] = X[i] += (x[i-1] - X[i]) * speed;
+ };
+ makecircle();
+},
+
+init = function(){
+ if(!isNaN(window.pageYOffset)){
+  ymouse += window.pageYOffset;
+  xmouse += window.pageXOffset;
+ } else init.nopy = true;
+ for (var d, i = n; i > -1; --i){
+  d = document.createElement('div'); d.id = 'iemsg' + i;
+  d.style.height = d.style.width = a + 'px';
+  d.appendChild(document.createTextNode(msg[i]));
+  oi.appendChild(d); y[i] = x[i] = Y[i] = X[i] = 0;
+ };
+ o.appendChild(oi); document.body.appendChild(o);
+ setInterval(drag, 25);
+},
+ascroll = function(){
+ ymouse += window.pageYOffset;
+ xmouse += window.pageXOffset;
+ window.removeEventListener('scroll', ascroll, false);
+};
+o.id = 'outerCircleText'; o.style.fontSize = size + 'px';
+if (window.addEventListener){
+ window.addEventListener('load', init, false);
+ document.addEventListener('mouseover', mouse, false);
+ document.addEventListener('mousemove', mouse, false);
+  if (/Apple/.test(navigator.vendor))
+   window.addEventListener('scroll', ascroll, false);
+}
+else if (window.attachEvent){
+ window.attachEvent('onload', init);
+ document.attachEvent('onmousemove', mouse);
+};
+})();
+</script>
+
+<meta charset="utf-8">
+<title>Ejemplo Practica 1 Movil</title>
+<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.css">
+<script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+<script src="http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.js"></script>
+</head> 
+<body> 
+
+
+<div data-role="page" id="inicio" data-theme="b">
+	<div data-role="header">
+		<h1>Galeria De Linkin Park</h1>
+	</div>
+
+
+
+	<div data-role="content">	
+		<ul data-role="listview">
+			<li><a href="#page2">linkin park</a></li>
+            <li><a href="#page3">integrantes</a></li>
+			<li><a href="#page4">logo</a></li>
+		</ul>
+        
+        
+        
+    </div>    
+   	<div data-role="content" align="justify">
+    
+    
+    <a href="#mykar" data-rel="popup" data-position-to="window">
+    <img src="Imagenes/03.jpg" alt="skaret view" style="width:100px;"></a>
+    <div data-role="popup" id="mykar">
+    <a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">close</a><img src="Imagenes/03.jpg" style="width:800px;heigh:500px;" alt="Skaret view">
+        </div>
+    
+    Cuando estabas de pie en la estela de devastación 
+Cuando estabas esperando en el borde de lo desconocido 
+Y con el cataclismo que llueve 
+lloras por dentro, "salvame ahora" 
+Tú estabas allí increíblemente sola 
+
+Sientes frío y perdida en la desesperación 
+Construyes la esperanza, pero el fracaso es todo lo que conoces 
+Recuerda toda la tristeza y la frustración 
+Y dejarlo ir 
+Déjalo ir 
+    <br>
+    
+    <a href="#mypop" data-rel="popup" class="ui-btn ui-btn-inline ui-corner-all">E mail </a>
+    
+    <div data-role="popup" id="mypop">
+    <p>alan.drug97@hotmail.com</p>
+    </div>
+    
+    </div>
+    
+     <div data-role="content">
+    <div data-role="collapsible-set">
+    <div data-role="collapsible" data-collapsed="true">
+      <h1>LINKIN PARK</h1>
+    <a href="#mymapa" data-rel="popup" data-position-to="window">
+    <img src="Imagenes/09.jpg" alt="Skatet View" style="width:100px;"></a>
+    
+    <div data-role="popup" id="mymapa">
+      
+      <a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a><img src="Imagenes/09.jpg" style="width:800px;height:500px;" alt="Skaret View">
+      </div>
+      
+             </div>
+              </div>
+                </div>
+	
+    <div data-role="footer" data-position="fixed"1 >
+		<div data-role="navbar" data-iconpos="top">
+        <ul>
+        <li><a href="#inicio" data-transition="pop" data-icon="home"> INICIO </a>
+        </li>
+        <li> <a href="#ayuda" data-transition="flip" data-icon="alert"> AYUDA </a>
+        </li>
+        <li> <a href="#contacto" data-transition="fade" data-icon="info"> CONTACTO </a>
+        </li>
+        </ul>
+       </div>
+	    </div>
+        
+        
+</div>
+
+
+<div data-role="page" id="page2" data-theme="b">
+	<div data-role="header">
+     <a data-role="button" data-rel="back" data-direction="reverse" data-icon="back"> Regresar</a>
+		<h1>LINKIN PARK</h1>
+        
+	</div>
+	<div data-role="content">
+	<center>
+	  <p><img src="Imagenes/06.jpg" width="280" height="280" > </p>
+	  <p>Banda originaria de Estados Unidos y su genero es el nu metal y rapcore, premiada a lo largo de su carrera con distintos galardones entre los que destacan varios premios Grammy.<br>
+      Los comienzos de la banda se remontan a un pequeño estudio del MC/vocalista Mike Shinoda, donde él y Brad Delson grabaron el primer material de la banda en 1996. Los dos habían ido juntos al instituto, donde conocieron al baterista del grupo, Rob Bourdon. Shinoda contactó con el DJ Joe Hahn cuando estudiaba ilustración en el Art Center College de Pasadena.Mientras tanto, en la UCLA, Delson compartió apartamento con el bajista Dave Farrell, quien dejó la banda después de los estudios, ya que estaba comprometido con su otra formación, The Snax, y regresó un año más tarde. En ese momento, se denominaban Xero y grabaron varios demos. Nunca consiguieron un contrato y el proyecto no prosperó. Entonces Mike Shinoda decidió contratar un vocalista, y puso un anuncio. Consiguieron a Chester Bennington, natural de Arizona, que comenzó grabando discos cuando tenía 16 años en el grupo Grey Daze. Chester interrumpió su vigésima tercera fiesta de cumpleaños, para ir a grabar su voz sobre los demos que recibió, uno con las canciones interpretadas por otro vocalista, y otra con los tracks instrumentales. Terminó en poco tiempo y llamó al grupo para decirles que estaba terminado, sorprendidos le pidieron que pusiera la grabación en el teléfono. La voz de Chester les impactó tanto que lo convocaron inmediatamente.<br>
+      <br>
+      Tras la integración de Bennington, el grupo se llamó Hybrid Theory (la idea viene de la mezcla de diferentes estilos que querían unir), sin embargo, debido a un problema de registro del nombre con un grupo llamado Hybrid, se vieron forzados a cambiar de nombre otra vez. Algunas ideas (no comprobadas) que se barajaron fueron Clear, Probing Lagers, Ten PM Stocker (este nombre era solo una broma, Chester lo dijo en una entrevista) y Platinum Lotus Foundation. Bennington sugirió Lincoln Park, por donde pasaba con el coche al volver de los ensayos. Sin embargo el dominio "lincolnpark.com" costaba más de lo que la banda se podía permitir, así que cambiaron la ortografía a Linkin Park.<br>
+      <br>
+      Trabajando en un sello independiente, la banda grabó el EP llamado Hybrid Theory EP. Compuesto por los temas Carousel, Technique, Step Up, And One, High Voltage y Part of Me.<br>
+      <br>
+      Después de firmar con Warner Bros. Records en 1999, su primer álbum, Hybrid Theory, se puso a la venta en el año 2000. Fue el disco más vendido en Estados Unidos y Nueva Zelanda en el 2001, con los éxitos One Step Closer, Crawling, Papercut, In The End y Points of Authority. Cabe destacar la ausencia de lenguaje malsonante en el álbum, en contraste con muchas otras canciones de grupos de nu metal.<br>
+      <br>
+      Linkin Park formó parte del Ozzfest en el 2001, donde estuvieron de gira junto con Marilyn Manson, Slipknot, Crazy Town, Papa Roach, y Disturbed. Linkin Park también creó su propia gira, de nombre Projekt: Revolution, en la que participaron Cypress Hill, Adema, DJ Z-Trip, Xzibit, Mudvayne y Blindside.<br>
+      <br>
+      Hybrid Theory vendió casi 20 millones de copias, aunque también recibió muchas críticas debido a las letras de las canciónes.<br>
+      <br>
+      El 30 de julio del año 2002, lanzaron un álbum de remezclas de Hybrid Theory, llamado Reanimation, que incluía entre otros, un remix de la canción Points Of Authority llamado Pts.of.Athrty, el cual sería uno de los videoclips del álbum junto con Frgt/10, el remix de Forgotten.<br>
+      <br>
+      Este álbum, a pesar de ser remixes del viejo material del grupo, fue "Platinium" en Estados Unidos vendiendo 1.000.000 de copias. También contó con la colaboración de varios artistas como Staind, Korn, Jurassic 5, entre otros.<br>
+      <br>
+      Debido al éxito que obtuvieron con Hybrid Theory y Reanimation, pasaron bastante tiempo de gira por Estados Unidos, y tuvieron que trabajar para su nuevo álbum en el autobús de la gira. La banda anunció la producción de un nuevo álbum de estudio en Diciembre de 2001, cuyo título sería Meteora (tomado del nombre de una catedral griega). Meteora ofrecía nuevamente rapcore y nu metal, aunque también fueron introducidos en el álbum nuevos sonidos e instrumentos como una flauta japonesa.<br>
+      <br>
+      El disco fue lanzado el 25 de Marzo de 2003 y vendió más de 800.000 copias en su primera semana. Los sencillos extraídos del álbum fueron Somewhere I Belong, Breaking the Habit, Numb y Faint, que fueron lanzados con sus respectivos videos musicales. El disco vendió 3 millones de copias antes de Octubre de ese mismo año.<br>
+      <br>
+      El éxito obtenido por la banda con Meteora hizo que formaran parte del festival Projekt Revolution junto con bandas importantes como Mudvayne, Blindside y Xzibit. Además, en 2003, la banda de metal Metallica les invitó a participar junto con ellos y con Limp Bizkit en el Summer Sanitarium Tour 2003.<br>
+      <br>
+      Meteora ganó varios premios y galardones como el premio MTV a la mejor banda de rock por la canción Somewhere I Belong o los concedidos en 2004 por los Radio Music Awards. Aunque Meteora no fue tan buen disco como Hybrid Theory, consiguió ser el tercer álbum más vendido en 2003 en los Estados Unidos.<br>
+      <br>
+      La banda tocó por todo el mundo en el Meteora World Tour.<br>
+      <br>
+      El 30 de noviembre de 2004, Linkin Park lanzaba junto con el rapero Jay-Z un EP de nombre Collision Course, en el que presentaban Mash-Ups (remezclas de dos temas distintos) de canciones de Linkin Park y Jay-Z. Entre ellas se encuentra Numb/Encore, el único sencillo sacado de este álbum, donde podemos encontrar remezclas de una misma canción Numb de Linkin Park y Encore de Jay-Z.<br>
+      <br>
+      Collision Course debutó en el número 1 en Estados Unidos, pero solo consiguió el puesto 17 en el Reino Unido.<br>
+      <br>
+      En 2005 decidieron tomarse un descanso. La banda participó junto con Music For Relief en ayudar a los afectados del tsunami sufrido en la India en 2004 y también actuó en el Live 8 junto a Jay-Z.<br>
+      <br>
+      Mientras tanto, dos de sus componentes prepararon trabajos en solitario: Mike Shinoda, bajo la agrupación Fort Minor lanzó un álbum el 22 de noviembre del 2005 llamado The Rising Tied, y por otro lado Chester que está preparando el primer disco de su proyecto Dead By Sunrise o Snow White Tan, ya que todavía no está decidido el nombre.<br>
+      <br>
+      Linkin Park intervino en el Summer Sonic Festival de Japón,</p>
+	  <p>los días 12 y 13 de agosto de 2006.<br>
+	    <br>
+	    El 6 de marzo de 2007, Mike Shinoda publicó en su MySpace y en el de Linkin Park un post acerca del nuevo álbum, que se va a llamar "Minutes To Midnight", y se espera que sea lanzado el 15 mayo de 2007 en los Estados Unidos, y el 14 de mayo del mismo año en los demás países, aunque en otras fuentes se encuentra que el álbum será lanzado el 8 de mayo[1]. El primer sencillo, que se llama "What I've Done", ha sido lanzado el 2 de abril de 2007. El álbum mostrará un nuevo sonido de la banda. Su productor es Rick Rubin, quien ha trabajado con artistas como Red Hot Chili Peppers, Audioslave, Metallica, Weezer, System of a Down, Limp Bizkit, U2 y muchos otros más.</p>
+	</center>
+        	
+	</div>
+	<div data-role="footer" data-position="fixed">
+		<div data-role="navbar" data-iconpos="top">
+        <ul>
+        <li><a href="#inicio" data-transition="pop" data-icon="home"> INICIO </a>
+        </li>
+        <li> <a href="#ayuda" data-transition="flip" data-icon="alert"> AYUDA </a>
+        </li>
+        <li> <a href="#contacto" data-transition="fade" data-icon="info"> CONTACTO </a>
+        </li>
+        </ul>
+        </div>
+	</div>
+</div>
+
+<div data-role="page" id="page3" data-theme="b">
+	<div data-role="header">
+     <a data-role="button" data-rel="back" data-direction="reverse" data-icon="back"> Regresar</a>
+		<h1>INTEGRANTES</h1>
+	</div>
+	<div data-role="content">
+    <h1>Chester Bennington</h1>	
+		<center><img src="Imagenes/chester.jpg" width="280" height="280"> </center>
+        Chester, es el vocalista de Linkin Park. Nacio el 20 d Marzo de 1976, el era d Arizona. Antes de unirse a Linkin Park (1998), Chester tenia su propia banda en la cual no le iba muy bien. Cuando los de Linkin Park lo conocieron lo llamaron "Magic Chester". Chester esta casado a su esposa Smantha, y tiene un hijo llamado Draven.
+        <h1>Mike Shinoda</h1>
+        <center><img src="Imagenes/mike2.gif" width="280" height="280"></center>
+        Mike nacio el 11 de enero de 1977. Antes de estar en Linkin Park, conocio a Joe Hahn, e hicieron su propia banda llamada "Xero", desues concerian a Farrel, y a Brad y por ultimo a Chester, y es el que escribe la mayor parte de las canciones. Mike es medio Japones. Se caso en Mayo del 2003. Mike es el vocalista de la banda junto con Chester, pero Mike canta las partes q son como un rap.
+        <h1>Joe Hahn (Mr Hahn)</h1>
+        <center><img src="Imagenes/hahn.jpg" width="280" height="280"></center>
+        Joe nacio en 15 de marzo de 1977. El vive en Los Angeles. El viene a ser el "DJ" de la banda, y tambien es el que se encarga de las ideas de sus "Video Clips", uno por ejemplo es el de la cancion "One Step Closer". No es muy "buena gente" con sus fans, ya que es de un frio y aburrido temperamento.
+        <h1>Rob Buordon</h1>
+        <center><img src="Imagenes/rob.jpg" width="280" height="280"></center>
+        Rob nacio el 20 de enero de 1979. Rob es judio, antes de entrar a la banda era mesero en un restaurant poco conocido. Rob toco en su primera banda cuando tenia 13 años. El es el baterista de la banda. Cuando Rob no esta tocando la bateria le gusta tocar el piano.
+        <h1>Brad Delson</h1>
+        <center><img src="Imagenes/brad.jpg" width="280" height="280"></center>
+        Brad nacio el 1 de diciembre de1977. El toca la guitarra electrica en al banda. Asi como Rob, el tambien es judio. Segun Rob, ellos son como mejores amigos. Le gusta mucho todo lo que son programas de musica, sobre todo MTV. El es fan de Brithney Spears, lo cual averguenza a toda la banda. Brad segun el es comi "el chico bueno de la banda", ya que una vez cuando querian celebrar el exito d euno de sus albumes decifieron ir a "Hooters", pero el dijo q no le gustaban esas cosas y sugirio ir al "bowling", pero finalmente fue con los demas a hooters.
+        <h1>Phoenix Farrel</h1>
+        <center><img src="Imagenes/farrel.jpg" width="280" height="280"></center>
+        Su verdadero numbre es David Michael Farrel, pero es mas conocido como Phoenix Farrel. El toca el bajo en la banda. Nacio el 8 de febrero de 1977. Al principio el tocaba la guitarra electrica con un grupo llamado "The Snax", pero despues comenso a tocar el bajo, y lo siguio tocando hasta ahora. El tocaba con "Xero" (la banda que tenian Mike y Mr Hahn), pero prefirio salir de gira con "The snax", y cuando regreso a "Xero", ya tenia el nombre de Linkin Park. Su madre le enseño a tocar la guitarra. 
+        	
+	</div>
+	<div data-role="footer"  data-position="fixed">
+		<div data-role="navbar" data-iconpos="top">
+        <ul>
+        <li><a href="#inicio" data-transition="pop" data-icon="home"> INICIO </a>
+        </li>
+        <li> <a href="#ayuda" data-transition="flip" data-icon="alert"> AYUDA </a>
+        </li>
+        <li> <a href="#contacto" data-transition="fade" data-icon="info"> CONTACTO </a>
+        </li>
+        </ul>
+        </div>
+	</div>
+</div>
+    
+<div data-role="page" id="page4" data-theme="b">
+	<div data-role="header">
+     <a data-role="button" data-rel="back" data-direction="reverse" data-icon="back"> Regresar</a>
+		<h1>LOGO</h1>
+	</div>
+	<div data-role="content">	
+		<center><img src="Imagenes/01.jpg" width="280" height="280"></center>
+		<p>FRASE DE LINKIN PARK:</p>
+		<p>&quot;No desprecies a la gente ni la discrimines por dinero por que vale mucho mas que eso&quot;</p>
+	</div>
+	<div data-role="footer"  data-position="fixed">
+		<div data-role="navbar" data-iconpos="top">
+        <ul>
+        <li><a href="#inicio" data-transition="pop" data-icon="home"> INICIO </a>
+        </li>
+        <li> <a href="#ayuda" data-transition="flip" data-icon="alert"> AYUDA </a>
+        </li>
+        <li> <a href="#contacto" data-transition="fade" data-icon="info"> CONTACTO </a>
+        </li>
+        </ul>
+        </div>
+	</div>
+</div>
+
+<div data-role="page" id="contacto" data-theme="b"> 
+	<div data-role="header">
+     <a data-role="button" data-rel="back" data-direction="reverse" data-icon="back"> Regresar</a>
+		<h1>En todas partes lml</h1>
+	</div>
+	<div data-role="content">	
+		<center><img src="Imagenes/07.jpg" width="280" height="280"></center>	
+        Lista de sus albumes:<br>
+        Recharged (2013)<br>
+        Living things (2012)<br>
+        A thousand suns (2010)<br>
+        Road to revolution (2008)<br>
+        Minutes to midnight (2007)<br>
+        Collision Course (2004)<br>
+        Live in Texas (2003)<br>
+        Meteora (2003)<br>
+        Reanimation (2002) 	 
+	</div>
+	<div data-role="footer" data-position="fixed"1>
+		<div data-role="navbar" data-iconpos="top">
+        <ul>
+        <li><a href="#inicio" data-transition="pop" data-icon="home"> INICIO </a>
+        </li>
+        <li> <a href="#ayuda" data-transition="flip" data-icon="alert"> AYUDA </a>
+        </li>
+        <li> <a href="#contacto" data-transition="fade" data-icon="info"> CONTACTO </a>
+        </li>
+        </ul>
+        </div>
+	</div>
+</div>
+
+<div data-role="page" id="ayuda" data-theme="b">
+	<div data-role="header">
+     <a data-role="button" data-rel="back" data-direction="reverse" data-icon="back"> Regresar</a>
+		<h1>LA MEJOR BANDA</h1>
+	</div>
+	<div data-role="content">	
+		<center><img src="Imagenes/05.jpg" width="280" height="280"></center>
+	</div>
+	<div data-role="footer" data-position="fixed"1>
+		<div data-role="navbar" data-iconpos="top">
+        <ul>
+        <li><a href="#inicio" data-transition="pop" data-icon="home"> INICIO </a>
+        </li>
+        <li> <a href="#ayuda" data-transition="flip" data-icon="alert"> AYUDA </a>
+        </li>
+        <li> <a href="#contacto" data-transition="fade" data-icon="info"> CONTACTO </a>
+        </li>
+        </ul>
+        </div>
+	</div>
+</div>
+
+</body>
+</html>
